@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "catgram"
+version = "0.1.0"
+description = "Basic tools for working with categorial grammars"
+license = "Apache-2.0"
+authors = ["Aditya Bhargava <aditya@cs.toronto.edu>"]
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing :: Linguistic",
+    ]
+readme = "README.md"
+repository = "https://github.com/rightaditya/catgram"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+lambda-calculus = "^3.0.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
