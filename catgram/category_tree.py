@@ -4,14 +4,14 @@ from dataclasses import dataclass
 from functools import cache, cached_property
 import logging
 import re
-from typing import ClassVar, overload
+from typing import ClassVar, overload, Optional
 
 try:
     from typing import Self  # Python 3.11+
 except ImportError:
-    from typing import TypeVar
+    from typing import TypeAlias
 
-    Self = TypeVar("Self", bound="CategoryTree")
+    Self: TypeAlias = "CategoryTree"
 
 
 @dataclass(frozen=True, repr=False)
@@ -22,8 +22,8 @@ class CategoryTree:
     atom_delim: ClassVar[re.Pattern] = re.compile(r"([()\\/])")
 
     root: str
-    result: Self | None = None
-    argument: Self | None = None
+    result: Optional[Self] = None
+    argument: Optional[Self] = None
 
     def __post_init__(self: Self):
         # validate the fields' values
@@ -82,8 +82,8 @@ class CategoryTree:
         """
         if (key := (cat, lambek)) in INSTANCES:
             return INSTANCES[key]
-        cat = tuple(a for a in cls.atom_delim.split(cat) if a)
-        return cls._parse_str(cat, left_associative, lambek, strict)[0]
+        cat_ = tuple(a for a in cls.atom_delim.split(cat) if a)
+        return cls._parse_str(cat_, left_associative, lambek, strict)[0]
 
     @classmethod
     def _parse_str(
