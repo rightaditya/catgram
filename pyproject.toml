@@ -17,9 +17,12 @@ repository = "https://github.com/rightaditya/catgram"
 python = "^3.10"
 lambda-calculus = "^3.0.0"
 
-
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
+
+[tool.poetry.scripts]
+ccg_depeval = 'catgram.cli.ccg_depeval:main'
+ccg_roots = 'catgram.cli.ccg_roots:main'
 
 [build-system]
 requires = ["poetry-core"]

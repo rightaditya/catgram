@@ -406,6 +406,31 @@ class CategoryTree:
             return argument + (self.root,) + result, argument_idxs + result_idxs
         return result + (self.root,) + argument, result_idxs + argument_idxs
 
+    @cached_property
+    def func_seq(self: Self) -> tuple[str, ...]:
+        """
+        The functorial sequence that this category decomposes into, as defined
+        by Bhargava and Penn (ACL 2023).
+        """
+        if self.is_atomic:
+            return (self.root,)
+        argument_str = self.argument.to_str()
+        if self.argument.is_atomic:
+            argument_str = f"{self.root}{argument_str}"
+        else:
+            argument_str = f"{self.root}({argument_str})"
+        return self.result.func_seq + (argument_str,)
+
+    @cache
+    def get_arg(self: Self, slot: int) -> Self:
+        if slot > self.arity:
+            raise ValueError(
+                f"invalid slot {slot!r} for category {self} with arity {self.arity}"
+            )
+        if slot == self.arity:
+            return self.argument if slot else self
+        return self.result.get_arg(slot)
+
 
 class MalformedCategoryError(Exception):
     pass

@@ -7,6 +7,10 @@ Development is on-again, off-again.
 Issue reports and requests welcome—even if it's for an item on the [TODO
 list](#todo) below, as you'd be providing extra motivation! :)
 
+This package also includes a CCG dependency evaluation script that implements
+decomposed scoring as specified in [Decomposed scoring of CCG
+dependencies](https://www.cs.toronto.edu/~aditya/ccgdspaper).
+
 ## Requirements
 
 * Python 3.10+
@@ -31,6 +35,12 @@ $ pip3 install catgram
       SVG, LaTeX...)
 
 ## License
+
+Unless otherwise stated, all files in this package are subject to the below
+copyright and license. The main exception is
+[candc_ignore.py](catgram/ccg/candc_ignore.py), which is derived from the
+original C&C package and thus covered by the C&C System Licence Agreement.
+The code therein is reproduced with permission for inclusion in this package.
 
 Copyright 2023 Aditya Bhargava
 
