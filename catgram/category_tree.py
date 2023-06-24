@@ -344,11 +344,11 @@ class CategoryTree:
 
         Args:
             pol_start: If not None, add an index to each atomic category
-              that indicates the position of that (polarized) primitive in the
-              lexical decomposition of the category. The integer value of this
-              parameter specifies the offset to use for the first index.
+                that indicates the position of that (polarized) primitive in
+                the lexical decomposition of the category. The integer value of
+                this parameter specifies the offset to use for the first index.
             positive: Whether the category has positive polarity. Has no effect
-              if `pol_start_idx` is None.
+                if `pol_start_idx` is None.
             l_assoc: Whether to use left-associative notation
             lambek: Whether to use Lambek notation
         Returns:
@@ -376,7 +376,10 @@ class CategoryTree:
         # cls = self.__class__.__name__
         # if self.is_atomic:
         #    return f"{cls}({self.root})"
-        # return f"{cls}(result={self.result!r}, root={self.root}, argument={self.argument!r})"
+        # return (
+        #     f"{cls}(result={self.result!r}, root={self.root}, "
+        #     f"argument={self.argument!r})"
+        # )
         # The above can get pretty long for larger categories, so just use the
         # string representation wrapped in the class name.
         return f"{self.__class__.__name__}({self.to_str()})"
