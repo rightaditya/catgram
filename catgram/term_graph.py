@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from collections.abc import Mapping, Sequence
 from functools import cache
 import re
