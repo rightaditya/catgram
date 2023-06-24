@@ -8,9 +8,9 @@ from typing import NamedTuple
 try:
     from typing import Self  # Python 3.11+
 except ImportError:
-    from typing import TypeVar
+    from typing import TypeAlias
 
-    Self = TypeVar("Self", bound="LexicalDecomposition")
+    Self: TypeAlias = "LexicalDecomposition"
 
 from lambda_calculus import terms
 
@@ -53,7 +53,7 @@ class LexicalDecomposition(NamedTuple):
     * The `target` field is the index of the node in the `nodes` tuple
       corresponding to the "target" atom of the lexical category. The target
       node is the root node of the lexical decomposition. In constructing
-      semantic terms in term graphs, word labels are assigned to target atoms.
+      semantic terms in term graphs, token labels are assigned to target atoms.
     """
 
     nodes: tuple[ProofFrameNode, ...]
@@ -110,9 +110,7 @@ class LexicalDecomposition(NamedTuple):
                 right = result._replace(nodes=tuple(nodes))
                 # left, right = argument, result
             case _:
-                raise ValueError(
-                    f"Invalid polarized category: ({category}){'+' if positive else '-'}"
-                )
+                raise ValueError(f"invalid category: {category}")
 
         nodes = left.nodes + right.nodes
         edges = [
@@ -144,7 +142,7 @@ class TermGraph:
     ):
         """
         Construct a term graph for the given sequent and linkage with optional
-        word labels.
+        token labels.
 
         Args:
             categories: A `Sequence` of any combination of `CategoryTree`s,
@@ -213,13 +211,13 @@ class TermGraph:
 
     def get_term(self, idx: int = 0) -> terms.Term:
         """
-        Get the semantic term for the word at the given index.
+        Get the semantic term for the token at the given index.
 
         Args:
-            idx (int): The index for the word.
+            idx (int): The index for the token.
 
         Returns:
-            Term: the semantic term for the word as situated in the term graph.
+            Term: the semantic term for the token as situated in the term graph.
                 If the index provided is that of the sentential category and
                 `self` is a valid term graph, this will return the semantic
                 term for the entire sentence.
