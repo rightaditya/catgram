@@ -207,32 +207,32 @@ class CategoryTree:
         if root is None:
             raise MalformedCategoryError("Empty category")
 
-        cat = "".join(cat[idx:i])
+        cat_ = "".join(cat[idx:i])
         if isinstance(root, cls):
-            logging.warning(f'Stripping redundant parentheses in "{cat}"')
-            cat = cat[1:-1]
+            logging.warning(f'Stripping redundant parentheses in "{cat_}"')
+            cat_ = cat_[1:-1]
             # TODO: nix sanity check after adding some tests
-            assert root == INSTANCES[cat, lambek]
+            assert root == INSTANCES[cat_, lambek]
             return root, i
         if root in "/\\" and right is None:
             raise MalformedCategoryError(
-                f'Missing right node after "{root}" at index {i} in "{cat}"'
+                f'Missing right node after "{root}" at index {i} in "{cat_}"'
             )
 
-        key = cat, lambek
+        key = cat_, lambek
         if key in INSTANCES:
-            cat = INSTANCES[key]
+            cat_ = INSTANCES[key]
             # TODO: nix sanity check after adding some tests
             if lambek and root == "\\":
-                assert cat == cls(root, right, left)
+                assert cat_ == cls(root, right, left)
             else:
-                assert cat == cls(root, left, right)
+                assert cat_ == cls(root, left, right)
         elif lambek and root == "\\":
-            INSTANCES[key] = cat = cls(root, right, left)
+            INSTANCES[key] = cat_ = cls(root, right, left)
         else:
-            INSTANCES[key] = cat = cls(root, left, right)
+            INSTANCES[key] = cat_ = cls(root, left, right)
 
-        return cat, i
+        return cat_, i
 
     @cached_property
     def is_complex(self: Self) -> bool:
