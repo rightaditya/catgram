@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "catgram"
-version = "0.1.0"
+version = "0.2.0"
 description = "Basic tools for working with categorial grammars"
 license = "Apache-2.0"
 authors = ["Aditya Bhargava <aditya@cs.toronto.edu>"]
