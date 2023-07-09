@@ -9,12 +9,12 @@ list](#todo) below, as you'd be providing extra motivation! :)
 
 This package also includes a CCG dependency evaluation script that implements
 decomposed scoring as specified in [Decomposed scoring of CCG
-dependencies](https://www.cs.toronto.edu/~aditya/ccgdspaper).
+dependencies](https://aclanthology.org/2023.acl-short.89/).
 See [below](#decomposed-scoring) for examples.
 If you use decomposed scoring in your research, please cite the paper:
 * [Aditya Bhargava](https://www.cs.toronto.edu/~aditya/) and [Gerald
   Penn](https://www.cs.toronto.edu/~gpenn/). 2023. [Decomposed scoring of CCG
-  dependencies](https://www.cs.toronto.edu/~aditya/ccgdspaper).  In *Proceedings
+  dependencies](https://aclanthology.org/2023.acl-short.89/).  In *Proceedings
   of the 61st Annual Meeting of the Association for Computational Linguistics*,
   Toronto, Canada.  Association for Computational Linguistics.
 
@@ -39,6 +39,17 @@ you use this package's implementation of their head-finding rules; etc.).
 In your environment of choice:
 ```shellsession
 $ pip3 install catgram
+```
+
+If you only want to run the evaluation script, you might want to consider using
+[`pipx`](https://pypa.github.io/pipx/) to keep the installation isolated:
+```shellsession
+$ pipx install catgram
+$ ccg_depeval -h
+```
+Or use it to run the script in a temporary environment:
+```shellsession
+$ pipx run --spec catgram ccg_depeval -h
 ```
 
 ## Examples
@@ -92,7 +103,7 @@ which doesn't produce a `.auto` file and instead produces a `.deps` file
 directly.
 
 Of course, omitting the root nodes will produce different scores.
-See [(Bhargava and Penn, 2023)](https://www.cs.toronto.edu/~aditya/ccgdspaper)
+See [(Bhargava and Penn, 2023)](https://aclanthology.org/2023.acl-short.89/)
 and [(Bhargava, 2022, chapter 5)](https://hdl.handle.net/1807/125446) for
 examples of why you should include root nodes.
 
