@@ -134,7 +134,7 @@ class TermGraph:
         self,
         categories: Sequence[CategoryTree | str | None],
         *,
-        sentential: int | None = 0,
+        sentential: int | None = -1,
         linkage: Mapping[int, int] | None = None,
         words: Sequence | None = None,
     ):
@@ -150,7 +150,7 @@ class TermGraph:
                 punctuation (e.g., in LCGbank).
             sentential (int | None): The index of the sentential category.
                 Can be negative as per the usual Python negative-index
-                convention. Defaults to `0`. `None` indicates that there is no
+                convention. Defaults to `-1`. `None` indicates that there is no
                 sentential category.
             linkage: A `Mapping` of source (positive) atom indices to
                 destination (negative) atom indices indicating links in the
@@ -166,8 +166,9 @@ class TermGraph:
             CategoryTree.from_str(cat) if isinstance(cat, str) else cat
             for cat in categories
         ]
-        if sentential is not None:
-            sentential = sentential % len(self.categories)
+        self.sentential = sentential
+        if self.sentential is not None:
+            self.sentential = self.sentential % len(self.categories)
         self.linkage = {} if linkage is None else linkage
         self.words = [f"<w_{i}>" for i in range(len(categories))]
         if words is not None:
@@ -185,7 +186,7 @@ class TermGraph:
                 continue
             else:
                 self.decomps.append(
-                    LexicalDecomposition.decompose_category(cat, i == sentential)
+                    LexicalDecomposition.decompose_category(cat, i == self.sentential)
                 )
         self.nodes = []
         self.clens = []
@@ -203,20 +204,33 @@ class TermGraph:
                 continue
             self.labels[clen + decomp.target] = word
 
-    def get_term(self, idx: int = 0) -> terms.Term:
+    def get_term(self, idx: int | None = None) -> terms.Term:
         """
         Get the semantic term for the token at the given index. The term will
         be beta-normal.
 
         Args:
-            idx (int): The index for the token.
+            idx (int | None): The index for the token. If `None`, the
+                sentential term is returned. Defaults to `None`.
 
         Returns:
-            Term: the semantic term for the token as situated in the term graph.
-                If the index provided is that of the sentential category and
-                `self` is a valid term graph, this will return the semantic
+            Term: the semantic term for the token as situated in the term
+                graph. If the index provided is that of the sentential category
+                and `self` is a valid term graph, this will return the semantic
                 term for the entire sentence.
+
+        Raises:
+            ValueError: If `idx` is `None` and `self` was not instantiated with
+                a sentential category index.
         """
+        if idx is None:
+            if self.sentential is None:
+                raise ValueError(
+                    "no sentential category index specified during "
+                    "TermGraph instantiation"
+                )
+            idx = self.sentential
+
         return self._get_term(self.clens[idx] + self.decomps[idx].target)
 
     def _get_term(self, idx: int) -> terms.Term:
