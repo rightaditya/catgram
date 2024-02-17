@@ -241,7 +241,7 @@ class TermGraph:
                 term = terms.Variable.with_valid_name(self.labels[idx])
             else:
                 term = self._get_term(linked)
-            for child in node.children:
+            for child in reversed(node.children):
                 term = terms.Abstraction(self.labels[idx + child], term)
         else:
             term = terms.Variable.with_valid_name(self.labels[idx])
