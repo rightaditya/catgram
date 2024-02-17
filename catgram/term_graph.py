@@ -67,8 +67,8 @@ class LexicalDecomposition(NamedTuple):
 
         Args:
             category (CategoryTree): The lexical category to decompose.
-            positive (bool, optional): The polarity of the category. Defaults to
-                `False`.
+            positive (bool, optional): The polarity of the category. Defaults
+                to `False`.
 
         Returns:
             LexicalDecomposition: The decomposition result.
@@ -187,10 +187,6 @@ class TermGraph:
                 self.decomps.append(
                     LexicalDecomposition.decompose_category(cat, i == sentential)
                 )
-        if sentential is not None:
-            self.decomps[sentential] = LexicalDecomposition.decompose_category(
-                self.categories[sentential], True
-            )
         self.nodes = []
         self.clens = []
         for decomp in self.decomps:
@@ -209,7 +205,8 @@ class TermGraph:
 
     def get_term(self, idx: int = 0) -> terms.Term:
         """
-        Get the semantic term for the token at the given index.
+        Get the semantic term for the token at the given index. The term will
+        be beta-normal.
 
         Args:
             idx (int): The index for the token.
