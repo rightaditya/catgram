@@ -236,9 +236,11 @@ class TermGraph:
     def _get_term(self, idx: int) -> terms.Term:
         if (node := self.nodes[idx]).positive:
             try:
-                term = self._get_term(self.linkage[idx])
+                linked = self.linkage[idx]
             except KeyError:
                 term = terms.Variable.with_valid_name(self.labels[idx])
+            else:
+                term = self._get_term(linked)
             for child in node.children:
                 term = terms.Abstraction(self.labels[idx + child], term)
         else:
