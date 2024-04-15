@@ -82,7 +82,7 @@ where:
 * `ground_truth.auto` is the ground-truth `.auto` file (e.g., straight from
   CCGbank). The heads specified in this file are followed directly according
   to the syntax specified in CCGbank.
-* `sys.auto` is the parse preidcted by the statistical parser. By default, the
+* `sys.auto` is the parse predicted by the statistical parser. By default, the
   head-finding rules of [Lewis and Steedman
   (2014)](https://aclanthology.org/D14-1107/) are followed to extract the root
   node.
