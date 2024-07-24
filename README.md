@@ -12,12 +12,27 @@ decomposed scoring as specified in [Decomposed scoring of CCG
 dependencies](https://aclanthology.org/2023.acl-short.89/).
 See [below](#decomposed-scoring) for examples.
 If you use decomposed scoring in your research, please cite the paper:
-* [Aditya Bhargava](https://www.cs.toronto.edu/~aditya/) and [Gerald
-  Penn](https://www.cs.toronto.edu/~gpenn/). 2023. [Decomposed scoring of CCG
-  dependencies](https://aclanthology.org/2023.acl-short.89/).  In *Proceedings
-  of the 61st Annual Meeting of the Association for Computational Linguistics
-  (Volume 2: Short Papers)*, pages 1030–1040, Toronto, Canada.  Association for
-  Computational Linguistics.
+```
+@inproceedings{bhargava-penn-2023-decomposed,
+    title = "Decomposed scoring of {CCG} dependencies",
+    author = "Bhargava, Aditya  and
+      Penn, Gerald",
+    editor = "Rogers, Anna  and
+      Boyd-Graber, Jordan  and
+      Okazaki, Naoaki",
+    booktitle = "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)",
+    month = jul,
+    year = "2023",
+    address = "Toronto, Canada",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.acl-short.89",
+    doi = "10.18653/v1/2023.acl-short.89",
+    pages = "1030--1040",
+    abstract = "In statistical parsing with CCG, the standard evaluation method is based on predicate-argument structure and evaluates dependencies labelled in part by lexical categories. When a predicate has multiple argument slots that can be filled, the same lexical category is used for the label of multiple dependencies. In this paper, we show that this evaluation can result in disproportionate penalization of supertagging errors and obfuscate the truly erroneous dependencies. Enabled by the compositional nature of CCG lexical categories, we propose *decomposed scoring* based on subcategorial labels to address this. To evaluate our scoring method, we engage fellow categorial grammar researchers in two English-language judgement tasks: (1) directly ranking the outputs of the standard and experimental scoring methods; and (2) determining which of two sentences has the better parse in cases where the two scoring methods disagree on their ranks. Overall, the judges prefer decomposed scoring in each task; but there is substantial disagreement among the judges in 24{\%} of the given cases, pointing to potential issues with parser evaluations in general.",
+}
+```
+(For formats other than BibTeX, see the [ACL
+Anthology](https://aclanthology.org/2023.acl-short.89).)
 
 The script can also do the regular CCG dependency evaluation
 ([examples](#standard-ccg-scoring)).
